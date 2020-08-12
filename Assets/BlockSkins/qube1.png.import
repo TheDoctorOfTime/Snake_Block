@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/rock block.png-64a75921ce48ea2204cfde14a36b8cbb.stex"
+path="res://.import/qube1.png-681cf0f21c74becff6424d5d0d00763d.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://BlockSkins/rock block.png"
-dest_files=[ "res://.import/rock block.png-64a75921ce48ea2204cfde14a36b8cbb.stex" ]
+source_file="res://Assets/BlockSkins/qube1.png"
+dest_files=[ "res://.import/qube1.png-681cf0f21c74becff6424d5d0d00763d.stex" ]
 
 [params]
 

@@ -2,12 +2,12 @@
 
 [ext_resource path="res://Scripts/TouchController.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/snake.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Backgrounds/background1.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Backgrounds/bg1.png" type="Texture" id=3]
 [ext_resource path="res://Scripts/Camera.gd" type="Script" id=4]
 [ext_resource path="res://Scripts/Spawner.gd" type="Script" id=5]
 [ext_resource path="res://Scripts/background.gd" type="Script" id=6]
 
-[sub_resource type="Shader" id=2]
+[sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
 uniform float scroll_speed;
 
@@ -18,11 +18,11 @@ void fragment() {
 	COLOR = col;
 }"
 
-[sub_resource type="ShaderMaterial" id=3]
-shader = SubResource( 2 )
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
 shader_param/scroll_speed = null
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 75.0242, 1355.84 )
 
 [node name="~WORLDSPACE~" type="Node2D"]
@@ -34,10 +34,10 @@ drag_margin_v_enabled = true
 script = ExtResource( 4 )
 
 [node name="TextureRect" type="TextureRect" parent="MainCamera"]
-material = SubResource( 3 )
-margin_left = -619.0
+material = SubResource( 2 )
+margin_left = -641.0
 margin_top = -2754.0
-margin_right = 623.0
+margin_right = 644.0
 margin_bottom = 2791.0
 texture = ExtResource( 3 )
 stretch_mode = 2
@@ -50,14 +50,14 @@ __meta__ = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MainCamera/LeftWall"]
 position = Vector2( -699.026, -2.27209 )
-shape = SubResource( 1 )
+shape = SubResource( 3 )
 
 [node name="RightWall" type="KinematicBody2D" parent="MainCamera"]
 position = Vector2( 2.15857, 0 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MainCamera/RightWall"]
 position = Vector2( 698.276, 0 )
-shape = SubResource( 1 )
+shape = SubResource( 3 )
 
 [node name="BLOCKSSPAWNER" type="Node2D" parent="MainCamera"]
 position = Vector2( 0, -1304.52 )

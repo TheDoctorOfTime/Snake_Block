@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/background3.png-db5f4b8650c489048f285b4aa92dae3f.stex"
+path="res://.import/qube4.png-94c1c6458f4e52b8bd93d090eb4b5824.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Backgrounds/background3.png"
-dest_files=[ "res://.import/background3.png-db5f4b8650c489048f285b4aa92dae3f.stex" ]
+source_file="res://Assets/BlockSkins/qube4.png"
+dest_files=[ "res://.import/qube4.png-94c1c6458f4e52b8bd93d090eb4b5824.stex" ]
 
 [params]
 

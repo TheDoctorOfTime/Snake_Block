@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/breaks block.png-948661bfc8e4880e3ac57f057b9d29b8.stex"
+path="res://.import/background3.png-3910b15e5563e36ae550698b9d59df16.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://BlockSkins/breaks block.png"
-dest_files=[ "res://.import/breaks block.png-948661bfc8e4880e3ac57f057b9d29b8.stex" ]
+source_file="res://Assets/Backgrounds/old/background3.png"
+dest_files=[ "res://.import/background3.png-3910b15e5563e36ae550698b9d59df16.stex" ]
 
 [params]
 

@@ -2,7 +2,7 @@ extends Node
 
 const TempNumber = 0;
 
-var GAP = 3;
+var GAP = 5;
 var timer = 0;
 
 var Point1 = Vector2();
@@ -79,7 +79,7 @@ func SpawnPreset():
 #BLOCKS
 func SpawnBlock(thisPosition):
 	var OffsetX = 620;
-	var OffsetY = 700;
+	var OffsetY = 800;
 	
 	var inst = block.instance();
 	if(thisPosition == 1):   inst.position = Vector2(Point1.x - OffsetX, Point1.y - OffsetY);

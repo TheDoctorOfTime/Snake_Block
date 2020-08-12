@@ -1,10 +1,27 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://BlockSkins/ground block.png" type="Texture" id=1]
+[ext_resource path="res://Assets/BlockSkins/qube1.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/block.gd" type="Script" id=2]
+[ext_resource path="res://Scripts/Poppins-Black.ttf" type="DynamicFontData" id=3]
 
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 121.49, 123.301 )
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 112.67, 18.0162 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 50
+extra_spacing_top = -13
+font_data = ExtResource( 3 )
+
+[sub_resource type="GDScript" id=3]
+script/source = "extends RichTextLabel
+
+var myScore;
+
+func _ready():pass
+"
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 113.863, 113.487 )
 
 [node name="Block" type="Sprite"]
 scale = Vector2( 1.35633, 1.35633 )
@@ -14,7 +31,39 @@ script = ExtResource( 2 )
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource( 2 )
+position = Vector2( 0, 101.775 )
+shape = SubResource( 1 )
+
+[node name="Score" type="RichTextLabel" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -210.0
+margin_top = -151.0
+margin_right = -26.0
+margin_bottom = -35.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+custom_fonts/normal_font = SubResource( 2 )
+bbcode_enabled = true
+bbcode_text = "[center]
+0"
+tab_size = 0
+text = "
+0"
+scroll_active = false
+script = SubResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+
+[node name="KinematicBody2D" type="KinematicBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D"]
+position = Vector2( 0, -3.91006e-05 )
+shape = SubResource( 4 )
 [connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_Area2D_body_exited"]

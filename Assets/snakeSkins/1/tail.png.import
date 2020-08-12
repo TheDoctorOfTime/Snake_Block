@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/background4.png-5727b231285e748b7bac098b2ab8a64f.stex"
+path="res://.import/tail.png-b3c4e9f79456122d2e4c8abcce7ae12a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Backgrounds/background4.png"
-dest_files=[ "res://.import/background4.png-5727b231285e748b7bac098b2ab8a64f.stex" ]
+source_file="res://Assets/snakeSkins/1/tail.png"
+dest_files=[ "res://.import/tail.png-b3c4e9f79456122d2e4c8abcce7ae12a.stex" ]
 
 [params]
 
