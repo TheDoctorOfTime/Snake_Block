@@ -4,7 +4,7 @@ const UP = Vector2(0, -1);
 const MAX = 0.01;
 const MAX2 = 0.001;
 
-var SPEED = 50;
+var SPEED = 450;
 var speed;
 var CORRECTION_SPEED = 5;
 var SMOOTHING = 25;
@@ -25,14 +25,16 @@ var velocity = 0;
 var motion = Vector2();
 
 func _ready():
-	if(tailNum == 1): SPEED = 450;
-	elif(tailNum == 2): SPEED = 405;
-	elif(tailNum == 3): SPEED = 360;
-	elif(tailNum == 4): SPEED = 315;
-	elif(tailNum == 5): SPEED = 270;
-	elif(tailNum == 6): SPEED = 225;
-	elif(tailNum == 7): SPEED = 180;
-	else: SPEED = 135;
+#	if(tailNum == 1): SPEED = 450;
+#	elif(tailNum == 2): SPEED = 405;
+#	elif(tailNum == 3): SPEED = 360;
+#	elif(tailNum == 4): SPEED = 315;
+#	elif(tailNum == 5): SPEED = 270;
+#	elif(tailNum == 6): SPEED = 225;
+#	elif(tailNum == 7): SPEED = 180;
+#	else: SPEED = 135;
+	
+#	SPEED = 450;
 	
 	baseY = position.y;
 	currPos = global_position.x;

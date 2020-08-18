@@ -15,7 +15,7 @@ var isDead = false;
 var currentPos = Vector2();
 
 func _ready():
-	snakeHead = get_parent().get_node("TouchController").get_node("SnakeHead");
+	snakeHead = get_parent().get_node("SnakeHead");
 	set_process(true);
 
 func _process(deltaTime):
@@ -54,8 +54,8 @@ func _process(deltaTime):
 func shake():
 	
 	var duration = 0.25;
-	var frequency = 7;
-	var amplitude = 10;
+	var frequency = 8;
+	var amplitude = 15;
 	# Initialize variables.
 	_duration = duration
 	_timer = duration

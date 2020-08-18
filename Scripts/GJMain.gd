@@ -14,4 +14,4 @@ func onGameReady():
 func onLevelComplete(isLevelSuccess, coins=0):
 	print("Event onLevelComplete:", isLevelSuccess)
 	if isLevelSuccess:
-		level+=1
+		level+=1;

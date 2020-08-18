@@ -1,5 +1,7 @@
 extends Node
 
+const debug = true;
+
 const TempNumber = 0;
 
 var GAP = 5;
@@ -11,18 +13,7 @@ var Point3 = Vector2();
 var Point4 = Vector2();
 
 onready var block = preload("res://Scenes/Block.tscn");
-
-#PRESETS 
-#(Playing the Game I couldn't find an instance where 3 would spawn at a time)
-#OOOO - 1234 - 0
-#OOXX - 1200 - 1
-#XXOO - 0034 - 2
-#OXOX - 1030 - 3
-#XOXO - 0204 - 4
-#OXXX - 1000 - 5
-#XOXX - 0200 - 6
-#XXOX - 0030 - 7
-#XXXO - 0004 - 8
+onready var point = preload("res://Scenes/point.tscn");
 
 var PresetNumber = TempNumber;
 
@@ -30,10 +21,11 @@ func _ready():
 	pass;
 
 func _process(deltaTime):
+	if(debug): return;
 	
 	if(timer >= 0): timer -= deltaTime;
 	else:
-		if(get_parent().get_parent().get_node("TouchController/SnakeHead").movingForward):
+		if(get_parent().get_parent().get_node("SnakeHead").movingForward):
 			SpawnPreset();
 		timer = GAP;
 
@@ -56,22 +48,42 @@ func SpawnPreset():
 		1:
 			SpawnBlock(1);
 			SpawnBlock(2);
+			SpawnPoint(3);
+			SpawnPoint(4);
 		2:
+			SpawnPoint(1);
+			SpawnPoint(2);
 			SpawnBlock(3);
 			SpawnBlock(4);
 		3:
 			SpawnBlock(1);
+			SpawnPoint(2);
 			SpawnBlock(3);
+			SpawnPoint(4);
 		4:
+			SpawnPoint(1);
 			SpawnBlock(2);
+			SpawnPoint(3);
 			SpawnBlock(4);
 		5:
 			SpawnBlock(1);
+			SpawnPoint(2);
+			SpawnPoint(3);
+			SpawnPoint(4);
 		6:
+			SpawnPoint(1);
 			SpawnBlock(2);
+			SpawnPoint(3);
+			SpawnPoint(4);
 		7:
+			SpawnPoint(1);
+			SpawnPoint(2);
 			SpawnBlock(3);
+			SpawnPoint(4);
 		8:
+			SpawnPoint(1);
+			SpawnPoint(2);
+			SpawnPoint(3);
 			SpawnBlock(4);
 	
 	timer = GAP;
@@ -92,3 +104,24 @@ func SpawnBlock(thisPosition):
 	var bloc = inst;
 	remove_child(bloc);
 	get_parent().get_parent().add_child(bloc);
+
+func SpawnPoint(thisPosition):
+	#GENERATE NUMBER
+	PresetNumber = randi() % 2;
+	if(PresetNumber == 0): return;
+	
+	var OffsetX = 620;
+	var OffsetY = 1400;
+	
+	#TODO: CHANGE BLOCK FOR POINT
+	var inst = point.instance();
+	if(thisPosition == 1):   inst.position = Vector2(Point1.x - OffsetX, Point1.y - OffsetY);
+	elif(thisPosition == 2): inst.position = Vector2(Point2.x - OffsetX, Point2.y - OffsetY);
+	elif(thisPosition == 3): inst.position = Vector2(Point3.x - OffsetX, Point3.y - OffsetY);
+	elif(thisPosition == 4): inst.position = Vector2(Point4.x - OffsetX, Point4.y - OffsetY);
+	
+	add_child(inst);
+	
+	var poin = inst;
+	remove_child(poin);
+	get_parent().get_parent().add_child(poin);

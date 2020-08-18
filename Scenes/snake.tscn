@@ -4,7 +4,7 @@
 [ext_resource path="res://Scripts/snake.gd" type="Script" id=2]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 10.9617
+radius = 9.40842
 
 [node name="SnakeHead" type="KinematicBody2D"]
 script = ExtResource( 2 )
@@ -20,5 +20,5 @@ scale = Vector2( 4, 4 )
 shape = SubResource( 1 )
 
 [node name="skin" type="Sprite" parent="Head"]
-scale = Vector2( 0.2875, 0.2875 )
+scale = Vector2( 0.229989, 0.229989 )
 texture = ExtResource( 1 )

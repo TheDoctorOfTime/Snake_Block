@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Scripts/TouchController.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/snake.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Scripts/Camera.gd" type="Script" id=4]
 [ext_resource path="res://Scripts/Spawner.gd" type="Script" id=5]
 [ext_resource path="res://Scripts/background.gd" type="Script" id=6]
+[ext_resource path="res://Scripts/GJMain.gd" type="Script" id=7]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -27,6 +28,10 @@ extents = Vector2( 75.0242, 1355.84 )
 
 [node name="~WORLDSPACE~" type="Node2D"]
 position = Vector2( 621, 1104 )
+script = ExtResource( 7 )
+
+[node name="TouchController" type="Node2D" parent="."]
+script = ExtResource( 1 )
 
 [node name="MainCamera" type="Camera2D" parent="."]
 current = true
@@ -79,9 +84,7 @@ scale = Vector2( 1.35633, 1.35633 )
 position = Vector2( 462.838, 0 )
 scale = Vector2( 1.35633, 1.35633 )
 
-[node name="TouchController" type="Node2D" parent="."]
-script = ExtResource( 1 )
-
-[node name="SnakeHead" parent="TouchController" instance=ExtResource( 2 )]
+[node name="SnakeHead" parent="." instance=ExtResource( 2 )]
 position = Vector2( -13.0458, 698.276 )
 z_as_relative = false
+script = ExtResource( 1 )
