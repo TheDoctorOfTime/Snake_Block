@@ -25,8 +25,7 @@ func _process(deltaTime):
 	
 	if(timer >= 0): timer -= deltaTime;
 	else:
-		if(get_parent().get_parent().get_node("SnakeHead").movingForward):
-			SpawnPreset();
+		SpawnPreset();
 		timer = GAP;
 
 func SpawnPreset():

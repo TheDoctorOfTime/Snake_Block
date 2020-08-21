@@ -21,7 +21,7 @@ func _ready():
 func _process(deltaTime):
 	if(isDead): return;
 	
-	position = Vector2(currentPos.x, snakeHead.position.y-600);
+	position = Vector2(currentPos.x, snakeHead.position.y-300);
 	
 	# Only shake when there's shake time remaining.
 	if _timer == 0:

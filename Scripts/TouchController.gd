@@ -1,98 +1,66 @@
-extends Node2D
+extends KinematicBody2D
 
-const SPEED = 300 # pixel per second
-const MAX_TRACKING_DISTANCE = 400 # pixel
+const UP = Vector2(0, -1);
+const SPEED = 6000; # pixel per second
+const MAX_TRACKING_DISTANCE = 50; # pixel
+const SMALLEST_REGISTERED_OFFSET = 1.0;
 
-var screen_touch = false
-var path = []
+var screen_touch = false;
+var path = [];
 
+var motion = Vector2();
 
-func _unhandled_input(event):
-	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT:
-		screen_touch = event.pressed
-		if screen_touch:
-			add_to_path(event.global_position)
-	elif event is InputEventMouseMotion and screen_touch:
-		add_to_path(event.global_position)
+var isHead;
 
+var forwardMovement = 750;
 
-func add_to_path(position):
-	var distance = global_position.distance_to(position)
-	if  distance > MAX_TRACKING_DISTANCE:
-		path.clear()
-	path.push_back(position)
+func _ready():
+	motion.y = -1 * forwardMovement;
 
+func _input(event):
+	if event is InputEventScreenTouch:
+		screen_touch = event.pressed;
+		if(!screen_touch): path.clear();
+		
+	elif event is InputEventScreenDrag and screen_touch:
+		var distance = position.distance_to(event.position);
+		
+		if distance <= MAX_TRACKING_DISTANCE:
+			if event.relative.length() >= SMALLEST_REGISTERED_OFFSET:
+				path.push_back(event.relative);
+		else:
+			path.clear();
+			path.push_back(position.direction_to (event.position) * distance);
 
-func _physics_process(delta):
-	if path.empty(): return
-	var next_pos = path.front()
+func _physics_process(deltaTime):	
+	
+	if(!path.empty()):
+		motion.y = -1 * forwardMovement;
+		var next_offset = path.front();
+		
+		var direction = next_offset.normalized().x;
+		var distance = next_offset.length();
+		var reach = SPEED * 0.078;
 
-	var direction = global_position.direction_to(next_pos)
-	var distance = global_position.distance_to(next_pos)
-	var reach = SPEED * delta
+		print(direction);
 
-	if distance > reach:
-		# next_pos is out of reach in this frame
-		# => move as far as possible towards it!
-		global_position += direction * reach
-	elif distance < reach:
-		# next_pos is reachable in this frame
-		# =>  move there and remove it from the path
-		while distance < reach:
-			global_position += direction * distance
-			reach -= distance
-			path.pop_front()
+		if distance > reach:
+			motion.x += direction * reach;
+			path[0] *= 1-reach/distance;
+		else:
+			while distance <= reach:
+				motion.x += direction * distance;
+				reach -= distance;
+				path.pop_front();
 
-			# check if theres another position in the path
-			# that we can already move towards
-			if path.empty(): return
-			next_pos = path.front()
-			direction = global_position.direction_to(next_pos)
-			distance = global_position.distance_to(next_pos)
+				if path.empty(): return
+				next_offset = path.front();
+				direction = next_offset.normalized().x;
+				distance = next_offset.length();
 
+#			if distance > reach:
+#				motion.x += direction * reach;
+#				path[0] *= 1-reach/distance;
+		
+	motion = move_and_slide(motion, UP);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#============================================#
-#                OLD CODE                    #
-#============================================#
-
-#var rel = Vector2();
-
-#var isDragging = false;
-#var isTouching = false;
-#var direction = 0;
-
-#func _input(event):
-#	if event is InputEventScreenDrag:  
-#		rel = event.get_relative().normalized();
-#		
-#		if(rel.x > 0): direction = 1;
-#		elif(rel.x < 0): direction = -1;
-#		else: direction = direction;
-#
-#		isDragging = true;
-#		
-#	if event is InputEventScreenTouch:
-#		if (event.pressed): isTouching;
-#		else: isTouching = false;
-#		if (!event.pressed && isDragging):
-#			direction = 0;
-#			isDragging = false;
-
-#THE PLAN:
-#GET FINGER LOCATION AND IF SNAKE IS WITHIN A 5% DIFFERENCE OF THE FINGER POSITION
-#THEN THE SNAKE STAYS PUT, ELSE THE SNAKE WILL MOVE TOWARDS THE FIRNGER POSITION
