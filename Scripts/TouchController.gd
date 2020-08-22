@@ -1,9 +1,9 @@
 extends KinematicBody2D
 
 const UP = Vector2(0, -1);
-const SPEED = 6000; # pixel per second
-const MAX_TRACKING_DISTANCE = 50; # pixel
-const SMALLEST_REGISTERED_OFFSET = 1.0;
+const SPEED = 10000; # pixel per second
+const MAX_TRACKING_DISTANCE = 500; # pixel
+const SMALLEST_REGISTERED_OFFSET = 0.5;
 
 var screen_touch = false;
 var path = [];
@@ -38,18 +38,19 @@ func _physics_process(deltaTime):
 		motion.y = -1 * forwardMovement;
 		var next_offset = path.front();
 		
+		next_offset.y = 0;
+		
 		var direction = next_offset.normalized().x;
 		var distance = next_offset.length();
-		var reach = SPEED * 0.078;
-
-		print(direction);
+		var reach = SPEED * deltaTime;
+		var difference = SPEED * (deltaTime*2);
 
 		if distance > reach:
-			motion.x += direction * reach;
+			motion.x += direction * difference;
 			path[0] *= 1-reach/distance;
 		else:
 			while distance <= reach:
-				motion.x += direction * distance;
+				motion.x += direction * difference;
 				reach -= distance;
 				path.pop_front();
 
@@ -58,9 +59,12 @@ func _physics_process(deltaTime):
 				direction = next_offset.normalized().x;
 				distance = next_offset.length();
 
-#			if distance > reach:
-#				motion.x += direction * reach;
-#				path[0] *= 1-reach/distance;
+			if distance > reach:
+				motion.x += direction * difference;
+				path[0] *= 1-reach/distance;
+	else:
+		motion.x = 0;
 		
 	motion = move_and_slide(motion, UP);
+
 
