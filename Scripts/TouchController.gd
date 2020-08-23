@@ -1,70 +1,36 @@
 extends KinematicBody2D
 
 const UP = Vector2(0, -1);
-const SPEED = 10000; # pixel per second
-const MAX_TRACKING_DISTANCE = 500; # pixel
-const SMALLEST_REGISTERED_OFFSET = 0.5;
+const SPEED = 1200;
+const forwardMovement = 750;
+const MAX_I = 6;
 
-var screen_touch = false;
-var path = [];
+var touching = false;
+var dragging = false;
 
+var direction = 0;
 var motion = Vector2();
 
 var isHead;
 
-var forwardMovement = 750;
+var iteration = MAX_I;
 
 func _ready():
 	motion.y = -1 * forwardMovement;
 
 func _input(event):
 	if event is InputEventScreenTouch:
-		screen_touch = event.pressed;
-		if(!screen_touch): path.clear();
-		
-	elif event is InputEventScreenDrag and screen_touch:
-		var distance = position.distance_to(event.position);
-		
-		if distance <= MAX_TRACKING_DISTANCE:
-			if event.relative.length() >= SMALLEST_REGISTERED_OFFSET:
-				path.push_back(event.relative);
-		else:
-			path.clear();
-			path.push_back(position.direction_to (event.position) * distance);
-
-func _physics_process(deltaTime):	
+		if(event.pressed && !touching): touching = true;
+		if(!event.pressed && touching): touching = false;
 	
-	if(!path.empty()):
-		motion.y = -1 * forwardMovement;
-		var next_offset = path.front();
+	if event is InputEventScreenDrag:
+		dragging = true;
+		direction = event.relative.normalized().x;
 		
-		next_offset.y = 0;
-		
-		var direction = next_offset.normalized().x;
-		var distance = next_offset.length();
-		var reach = SPEED * deltaTime;
-		var difference = SPEED * (deltaTime*2);
+	if(dragging && !touching):
+		dragging = false;
+		direction = 0;
 
-		if distance > reach:
-			motion.x += direction * difference;
-			path[0] *= 1-reach/distance;
-		else:
-			while distance <= reach:
-				motion.x += direction * difference;
-				reach -= distance;
-				path.pop_front();
-
-				if path.empty(): return
-				next_offset = path.front();
-				direction = next_offset.normalized().x;
-				distance = next_offset.length();
-
-			if distance > reach:
-				motion.x += direction * difference;
-				path[0] *= 1-reach/distance;
-	else:
-		motion.x = 0;
-		
+func _physics_process(deltaTime):
+	motion.x = direction * SPEED;
 	motion = move_and_slide(motion, UP);
-
-

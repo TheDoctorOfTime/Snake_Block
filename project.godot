@@ -8,9 +8,44 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "InputEventAction",
+"class": "InputEventMultiScreenDrag",
+"language": "GDScript",
+"path": "res://TouchControl/CustomInputEvents/InputEventMultiScreenDrag.gd"
+}, {
+"base": "InputEventAction",
+"class": "InputEventScreenPinch",
+"language": "GDScript",
+"path": "res://TouchControl/CustomInputEvents/InputEventScreenPinch.gd"
+}, {
+"base": "InputEventAction",
+"class": "InputEventScreenTwist",
+"language": "GDScript",
+"path": "res://TouchControl/CustomInputEvents/InputEventScreenTwist.gd"
+}, {
+"base": "InputEventAction",
+"class": "InputEventSingleScreenDrag",
+"language": "GDScript",
+"path": "res://TouchControl/CustomInputEvents/InputEventSingleScreenDrag.gd"
+}, {
+"base": "InputEventAction",
+"class": "InputEventSingleScreenTap",
+"language": "GDScript",
+"path": "res://TouchControl/CustomInputEvents/InputEventSingleScreenTap.gd"
+}, {
+"base": "InputEventAction",
+"class": "InputEventSingleScreenTouch",
+"language": "GDScript",
+"path": "res://TouchControl/CustomInputEvents/InputEventSingleScreenTouch.gd"
+} ]
 _global_script_class_icons={
-
+"InputEventMultiScreenDrag": "",
+"InputEventScreenPinch": "",
+"InputEventScreenTwist": "",
+"InputEventSingleScreenDrag": "",
+"InputEventSingleScreenTap": "",
+"InputEventSingleScreenTouch": ""
 }
 
 [application]
@@ -18,6 +53,10 @@ _global_script_class_icons={
 config/name="SnakeBlock"
 run/main_scene="res://Scenes/Sandbox.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+Touch="*res://TouchControl/InputManager.gd"
 
 [display]
 
@@ -32,6 +71,7 @@ window/stretch/aspect="keep"
 [input_devices]
 
 pointing/emulate_touch_from_mouse=true
+pointing/emulate_mouse_from_touch=false
 
 [rendering]
 
