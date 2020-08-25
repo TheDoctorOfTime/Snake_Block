@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
+[ext_resource path="res://Assets/Backgrounds/bg5-2.png" type="Texture" id=1]
 [ext_resource path="res://Scenes/snake.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Assets/Backgrounds/bg1.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Backgrounds/bg5.png" type="Texture" id=3]
 [ext_resource path="res://Scripts/Camera.gd" type="Script" id=4]
 [ext_resource path="res://Scripts/Spawner.gd" type="Script" id=5]
 [ext_resource path="res://Scripts/background.gd" type="Script" id=6]
@@ -17,7 +18,6 @@ void fragment() {
 	vec4 col = texture(TEXTURE, shiftedUV);
 	COLOR = col;
 }"
-custom_defines = ""
 
 [sub_resource type="ShaderMaterial" id=2]
 shader = SubResource( 1 )
@@ -49,6 +49,20 @@ script = ExtResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="TextureRect2" type="TextureRect" parent="MainCamera"]
+material = SubResource( 2 )
+margin_left = -641.0
+margin_top = -2754.0
+margin_right = 644.0
+margin_bottom = 2791.0
+texture = ExtResource( 1 )
+stretch_mode = 2
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+scrollSpeed = -0.02
 
 [node name="LeftWall" type="KinematicBody2D" parent="MainCamera"]
 
