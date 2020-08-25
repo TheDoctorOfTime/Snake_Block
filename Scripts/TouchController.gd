@@ -1,8 +1,8 @@
 extends KinematicBody2D
 
 const UP = Vector2(0, -1);
-const SPEED = 1200;
-const forwardMovement = 750;
+const SPEED = 2000;
+const forwardMovement = 5200;
 const MAX_I = 6;
 
 var touching = false;

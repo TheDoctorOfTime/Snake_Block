@@ -1,12 +1,17 @@
 extends Line2D
 
+var target;
 var point;
 
-func _ready():
-	#set_as_toplevel(true);
-	pass;
+export(NodePath) var targetPath;
+var trailLength = 20;
 
-func _physics_process(deltaTime):
-	point = get_parent().position;
+func _ready():
+	target = get_node(targetPath);
+	
+func _process(deltaTime):
+	point = Vector2(target.position.x, target.position.y + 35);
 	add_point(point);
-	if(points.size() > 100): remove_point(0);
+	
+	while get_point_count() > trailLength:
+		remove_point(0);
